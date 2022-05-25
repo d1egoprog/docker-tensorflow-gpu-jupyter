@@ -22,6 +22,7 @@ sudo ubuntu-drivers autoinstall
 Initially, check the output of the following command `lspci | grep -i nvidia` to see if your device is recognized by the operative system. e.g., The following output is the example for the *GeForce GTX 1060* card. If this command does not exit any input, check the physical connection of your device; otherwise, you cannot continue.
 
 > 01:00.0 VGA compatible controller: NVIDIA Corporation GP106 [GeForce GTX 1060 6GB] (rev a1)
+>
 > 01:00.1 Audio device: NVIDIA Corporation GP106 High Definition Audio Controller (rev a1)
 
 If your graphic card is different is **recommended** to check which version of [`CUDA Drivers`](https://www.nvidia.com/download/index.aspx) is compatible with your system.
@@ -52,42 +53,41 @@ If the configuration is correct, the command `nvidia-smi` should show an output 
 > +-----------------------------------------------------------------------------+
 >
 > | NVIDIA-SMI 510.39.01    Driver Version: 510.39.01    CUDA Version: 11.6     |
-> 
+>
 > |-------------------------------+----------------------+----------------------+
-> 
+>
 > | GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
-> 
+>
 > | Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
-> 
+>
 > |                               |                      |               MIG M. |
-> 
+>
 > |===============================+======================+======================|
-> 
+>
 > |   0  NVIDIA GeForce ...  On   | 00000000:01:00.0 Off |                  N/A |
-> 
+>
 > | 42%   37C    P8     5W / 120W |     14MiB /  6144MiB |      0%      Default |
-> 
+>
 > |                               |                      |                  N/A |
-> 
-> 
+>
 > +-------------------------------+----------------------+----------------------+
-> 
+>
 >                                                                             
-> 
+>
 > +-----------------------------------------------------------------------------+
-> 
+>
 > | Processes:                                                                  |
-> 
+>
 > |  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
-> 
+>
 > |        ID   ID                                                   Usage      |
-> 
+>
 > |=============================================================================|
-> 
+>
 > |    0   N/A  N/A      1168      G   /usr/lib/xorg/Xorg                  9MiB |
-> 
+>
 > |    0   N/A  N/A      1350      G   /usr/bin/gnome-shell                1MiB |
-> 
+>
 > +-----------------------------------------------------------------------------+
 
 If this output is shown, is it possible to continue with the [Docker NVIDIA Support](#docker-nvidia-support)
