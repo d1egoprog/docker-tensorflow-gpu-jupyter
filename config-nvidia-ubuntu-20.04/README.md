@@ -13,7 +13,7 @@ This guide was tested on the following configurations and was updated up to the 
 
 First, it is mandatory to complete the docker [installation](https://docs.docker.com/engine/install/ubuntu/), then update and upgrade the system to install your machine drivers from the public repositories.
 
-```
+``` BASH
 sudo apt-get update
 sudo apt-get upgrade -y
 sudo ubuntu-drivers autoinstall
@@ -31,15 +31,15 @@ If your graphic card is different is **recommended** to check which version of [
 ## NVIDIA CUDA Drivers
 
 Once the preparation is finished, it is necessary to download metadata information to allow the driver installation in your system by running the following command:
-tf@function
-```
+
+``` BASH
 wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
 sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
 ```
 
 Then, manually is necessary to enter the [NVIDIA CUDA Developer](https://developer.nvidia.com/cuda-toolkit-archive) site with your login and password (if you don't have it, create one) and download the selected version of the CUDA Drivers for your card. e.g., For this guide, the *11.6.0* version was chosen.
 
-```
+``` BASH
 sudo dpkg -i cuda-repo-ubuntu2004-11-6-local_11.6.0-510.39.01-1_amd64.deb
 sudo apt-key add /var/cuda-repo-ubuntu2004-11-6-local/7fa2af80.pub
 sudo apt-get update
@@ -50,24 +50,44 @@ sudo apt-get -y install cuda nvidia-cuda-toolkit
 If the configuration is correct, the command `nvidia-smi` should show an output similar to this one:
 
 > +-----------------------------------------------------------------------------+
+>
 > | NVIDIA-SMI 510.39.01    Driver Version: 510.39.01    CUDA Version: 11.6     |
+> 
 > |-------------------------------+----------------------+----------------------+
+> 
 > | GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+> 
 > | Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+> 
 > |                               |                      |               MIG M. |
+> 
 > |===============================+======================+======================|
+> 
 > |   0  NVIDIA GeForce ...  On   | 00000000:01:00.0 Off |                  N/A |
+> 
 > | 42%   37C    P8     5W / 120W |     14MiB /  6144MiB |      0%      Default |
+> 
 > |                               |                      |                  N/A |
+> 
+> 
 > +-------------------------------+----------------------+----------------------+
+> 
 >                                                                             
+> 
 > +-----------------------------------------------------------------------------+
+> 
 > | Processes:                                                                  |
+> 
 > |  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+> 
 > |        ID   ID                                                   Usage      |
+> 
 > |=============================================================================|
+> 
 > |    0   N/A  N/A      1168      G   /usr/lib/xorg/Xorg                  9MiB |
+> 
 > |    0   N/A  N/A      1350      G   /usr/bin/gnome-shell                1MiB |
+> 
 > +-----------------------------------------------------------------------------+
 
 If this output is shown, is it possible to continue with the [Docker NVIDIA Support](#docker-nvidia-support)
@@ -76,13 +96,13 @@ If this output is shown, is it possible to continue with the [Docker NVIDIA Supp
 
 If all the previous procedure is completed and the NVIDIA Developer web page session is active, it is possible to download the binary using the `wget`. e.g., for this example, version *8.3.1* was selected.
 
-```
+``` BASH
 wget https://developer.nvidia.com/compute/cudnn/secure/8.3.1/local_installers/11.5/cudnn-local-repo-ubuntu2004-8.3.1.22_1.0-1_amd64.deb
 ```
 
 If the `wget` command fails is necessary to enter manually to the [Official Documentation](https://developer.nvidia.com/rdp/cudnn-archive), choose the version again, and log in with your previously created credentials, download the package and install it.
 
-```
+``` BASH
 sudo dpkg -i cudnn-local-repo-ubuntu2004-8.3.1.22_1.0-1_amd64.deb
 ```
 
@@ -103,7 +123,7 @@ Finally, after the installation of the CUDA Drivers is necessary to enable the D
 
 The first step is to activate the Nvidia repository to the package system by executing:
 
-```
+``` BASH
 distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
     && curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add - \
     && curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
@@ -111,7 +131,7 @@ distribution=$(. /etc/os-release;echo $ID$VERSION_ID) \
 
 Execute an update of the package metadata and install the *nvidia-docker2* package. Finally, restart the docker engine service.
 
-```
+``` BASH
 sudo apt-get update
 sudo apt-get install -y nvidia-docker2
 sudo systemctl restart docker
@@ -121,7 +141,7 @@ sudo systemctl restart docker
 
 Testing your docker engine interacting with the graphic card can be done by testing from the image perspective and from the image python environment. To check the operative system interaction, execute the command: 
 
-```
+``` BASH
 sudo docker run --rm --gpus all nvidia/cuda:11.0-base nvidia-smi
 ```
 
@@ -204,7 +224,7 @@ This will download the latest GPU TensorFlow supported image and deliver a conso
 
 Once this shell is delivered, type the `python` command to enter the python interpreter and paste:
 
-```
+``` PYTHON
 import tensorflow as tf
 tf.config.list_physical_devices()
 ```
