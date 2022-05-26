@@ -1,4 +1,4 @@
-FROM tensorflow/tensorflow:2.7.1-gpu
+FROM tensorflow/tensorflow:1.15.4-gpu
 MAINTAINER Diego Rincon-Yanez <diego-rincon@outlook.com>
 
 USER root

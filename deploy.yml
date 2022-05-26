@@ -6,7 +6,7 @@ volumes:
 
 services:
   tfgpu_jupyter:
-    image: d1egoprog/tensorflow-gpu-jupyter:2.7-lab
+    image: d1egoprog/tensorflow-gpu-jupyter:1.15.4-lab
     ports:
       - "9988:8888"
     restart: always
@@ -18,5 +18,3 @@ services:
         reservations:
           devices:
           - capabilities: [gpu]
-
-
