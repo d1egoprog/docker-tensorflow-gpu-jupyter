@@ -1,0 +1,21 @@
+version: '3.7'
+
+volumes:
+  tfgpu_jupyter_ipynb:
+  tfgpu_jupyter_data:
+
+services:
+  tfgpu_jupyter:
+    build: tensorflow-gpu-jupyter/
+    ports:
+      - "8888:8888"
+    restart: always
+    volumes:
+      - tfgpu_jupyter_ipynb:/home/jupyter/notebooks
+      - tfgpu_jupyter_data:/home/jupyter/data
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - capabilities: [gpu]
+
