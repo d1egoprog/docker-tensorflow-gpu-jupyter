@@ -7,7 +7,7 @@ volumes:
 
 services:
   tfgpu_jl:
-    build: tensorflow-gpu-jupyter/
+    image: d1egoprog/tensorflow-gpu-jupyter:2.9.3-lab
     ports:
       - "9988:8888"
     volumes:
